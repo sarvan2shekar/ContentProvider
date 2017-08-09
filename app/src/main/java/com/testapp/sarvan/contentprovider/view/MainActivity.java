@@ -61,25 +61,33 @@ public class MainActivity extends AppCompatActivity
                 LayoutInflater li = LayoutInflater.from(MainActivity.this);
                 View getEmpIdView = li.inflate(R.layout.dialog_get_name_phone, null);
 
-                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(MainActivity.this);
-                // set dialog_get_name_phone.xml to alertdialog builder
+                final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(MainActivity.this);
                 alertDialogBuilder.setView(getEmpIdView);
 
                 final EditText nameInput = getEmpIdView.findViewById(R.id.editTextDialogNameInput);
                 final EditText phoneInput = getEmpIdView.findViewById(R.id.editTextDialogPhoneInput);
-                // set dialog message
-
                 alertDialogBuilder
                         .setCancelable(false)
                         .setPositiveButton("Add", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
                                 // get user input and set it to result
-                                // edit text
-                                insertContact(nameInput.getText().toString(),
-                                        phoneInput.getText().toString());
-                                restartLoader();
+                                if (nameInput != null && nameInput.getText() != null
+                                        && !nameInput.getText().toString().trim().equalsIgnoreCase("") &&
+                                        phoneInput != null && phoneInput.getText() != null
+                                        && !phoneInput.getText().toString().trim().equalsIgnoreCase("")) {
+                                    insertContact(nameInput.getText().toString(),
+                                            phoneInput.getText().toString());
+                                    restartLoader();
+                                } else {
+                                    Toast.makeText(getApplicationContext(), "Enter valid input",
+                                            Toast.LENGTH_SHORT).show();
+                                }
                             }
-                        }).create().show();
+                        }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        // do nothing
+                    }
+                }).create().show();
             }
         });
     }
