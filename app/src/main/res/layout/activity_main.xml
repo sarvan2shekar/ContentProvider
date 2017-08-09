@@ -34,7 +34,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
-        android:backgroundTint="@color/colorPrimaryAccent"
         android:scaleType="center"
         android:tint="@color/colorPrimary"
         app:backgroundTint="@color/colorPrimaryAccent"
